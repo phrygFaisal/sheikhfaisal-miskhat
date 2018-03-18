@@ -140,19 +140,19 @@ Sample JSON output:
 * Import as Maven Project the project titled "transactionservicetest".
 * With the RESTful Transaction service running, the tests can be executed.
 * Run the project using maven build configuration 
-** with Base directory set to Workspace
-** with goal "-Dtest=TransactionTypeTest test"
-** Tests will be executed via Maven build run through JUnit tests using Cucumber based Step Definitions and Feature file.
-** There are ONLY 2 tests scripted at the moment!
+--> with Base directory set to Workspace
+--> with goal "-Dtest=TransactionTypeTest test"
+--> Tests will be executed via Maven build run through JUnit tests using Cucumber based Step Definitions and Feature file.
+--> There are ONLY 2 tests scripted at the moment!
 
 ## Architecture
 
 The test implementation is a Maven built simple Cucumber + JUnit framework.
 
 * Cucumber Tests and step definitions must be put under "src/test/java"
-** At present there is only one test file written aiming at the service for Transaction type.
+--> At present there is only one test file written aiming at the service for Transaction type.
 * Cucumber feature files are put under "src/test/resources". 
-** At present only 2 simple scenarios are covered.
+--> At present only 2 simple scenarios are covered.
 * CUSTOM REPORTs are not added at the moment, however the implementation of such is easy.
 
 ```
@@ -167,33 +167,23 @@ Feature: Testing Transaction Type feature
     When user request with transaction id 1000002
     Then the requested transaction is returned
 ```
-###To add new tests in the existing feature, add
+### To add new tests in the existing feature, add
 * Scenario in Feature file.
 * Include methods in the step definition class defining the steps mentioned in the newly written scenarios.
 * Run Maven build
 
-###To add new feature tests, add
+### To add new feature tests, add
 * New Feature file with scenarios.
 * Add methods under step definition defining the steps mentioned in the newly written scenarios.
 * Add new CucumberTest class targetting the new feature file.
 * Run Maven build
 
-###
 
+### Extended Design
 
-### Test flow
-
-** TransactionTypeTest (src/test/java) class is the starting point of test execution as moderated by JUnit. It points to the Cucumber feature file.
-** TransactionType.feature (src/test/resources) is the feature file that contains the Gherkin formatted test scenarios.
-** The scenarios in the feature file are defined in the step definition class TransactionTypeSteps
-
-
-
-* TransactionsResource, TransactionSumResource and TransactionTypeResource serve as servlet classes that delegate all API call functionalities to the class TransactionService for functionality.
-
-* TransactionService class implements functionality and uses TransactionDataObjects class to do the data operations.
-
-* TransactionDataObjects class prepares the memory with initial data and loads them to the server.
-
-* TransactionData constructs the data structure for the transaction data.
-
+* Using a test suite driven architechture where the Cucumber Tests can be categorized using tags - smoke, sanity, regression.
+* Use maven surefire plugin to generate the reports.
+* Trace steps of failed cases via the Cucumber tests.
+* Build complex test scenarios.
+* Use a single project with the web application and test implementation. Use single script to deploy and run automated tests based on test suite.
+* View flaky tests in the report.

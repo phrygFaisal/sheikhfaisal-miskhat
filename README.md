@@ -155,10 +155,17 @@ with goal "-Dtest=TransactionTypeTest test -fae surefire-report:report"
 The test implementation is a Maven built simple Cucumber + JUnit + SureFire Report framework.
 
 * Cucumber Tests and step definitions must be put under "src/test/java"
---> At present there is only one test file written aiming at the service for Transaction type.
+* At present there is only one test file written aiming at the service for Transaction type.
 * Cucumber feature files are put under "src/test/resources". 
---> At present only 4 simple scenarios are covered.
+* At present only 4 simple scenarios are covered.
 * CUSTOM REPORTs are not added at the moment, however the implementation of such is easy.
+
+#### Cucumber feature files offer good scalability and as the test base increases it also provides reusability of scenarios. Support of tags are an essential for the scope of this automation since in future we might be selective about which set of tests to run and when. Feature files may also be re-used for improvement and/or in migration of automation stacks.
+
+#### Driven by JUnit, the tests can benefit of ease of design of test suites in the future. Since all components are opensource, the solution is also cost-efficient. 
+
+#### On a large scale it is plausible to dedicate a Jenkins server for CI support and test plan for all/selective builds.
+
 
 ```
 Feature: Testing Transaction Type feature

@@ -36,6 +36,18 @@ This confirms that all the APIs that were mentioned in the challenge with specs 
 
 # RESTFul Implementation 
 
+## Architecture
+
+The implementation is administered by the servlet configuration "web.xml" file under WebContent->WEB-INF folder. This in turn points to the transaction service dynamic project.
+
+* TransactionsResource, TransactionSumResource and TransactionTypeResource serve as servlet classes that delegate all API call functionalities to the class TransactionService for functionality.
+
+* TransactionService class implements functionality and uses TransactionDataObjects class to do the data operations.
+
+* TransactionDataObjects class prepares the memory with initial data and loads them to the server.
+
+* TransactionData constructs the data structure for the transaction data.
+
 ##APIs
 
 ```
@@ -132,3 +144,56 @@ Sample JSON output:
 ** with goal "-Dtest=TransactionTypeTest test"
 ** Tests will be executed via Maven build run through JUnit tests using Cucumber based Step Definitions and Feature file.
 ** There are ONLY 2 tests scripted at the moment!
+
+## Architecture
+
+The test implementation is a Maven built simple Cucumber + JUnit framework.
+
+* Cucumber Tests and step definitions must be put under "src/test/java"
+** At present there is only one test file written aiming at the service for Transaction type.
+* Cucumber feature files are put under "src/test/resources". 
+** At present only 2 simple scenarios are covered.
+* CUSTOM REPORTs are not added at the moment, however the implementation of such is easy.
+
+```
+Feature: Testing Transaction Type feature
+ 
+  Scenario: Retrieve transaction Ids using existing transaction type value
+    When user request for transactions with REWE
+    Then the requested data is returned
+    
+    
+  Scenario: Retrieve transaction using existing transaction id
+    When user request with transaction id 1000002
+    Then the requested transaction is returned
+```
+###To add new tests in the existing feature, add
+* Scenario in Feature file.
+* Include methods in the step definition class defining the steps mentioned in the newly written scenarios.
+* Run Maven build
+
+###To add new feature tests, add
+* New Feature file with scenarios.
+* Add methods under step definition defining the steps mentioned in the newly written scenarios.
+* Add new CucumberTest class targetting the new feature file.
+* Run Maven build
+
+###
+
+
+### Test flow
+
+** TransactionTypeTest (src/test/java) class is the starting point of test execution as moderated by JUnit. It points to the Cucumber feature file.
+** TransactionType.feature (src/test/resources) is the feature file that contains the Gherkin formatted test scenarios.
+** The scenarios in the feature file are defined in the step definition class TransactionTypeSteps
+
+
+
+* TransactionsResource, TransactionSumResource and TransactionTypeResource serve as servlet classes that delegate all API call functionalities to the class TransactionService for functionality.
+
+* TransactionService class implements functionality and uses TransactionDataObjects class to do the data operations.
+
+* TransactionDataObjects class prepares the memory with initial data and loads them to the server.
+
+* TransactionData constructs the data structure for the transaction data.
+

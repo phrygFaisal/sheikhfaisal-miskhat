@@ -8,10 +8,13 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.java.en.When;
 import cucumber.api.junit.Cucumber;
 
+/*
+ * Add feature file and tags here
+ */
+
 @RunWith(Cucumber.class)
 //@CucumberOptions(features = { "classpath:TestFeatures/TransactionType.feature" }, strict = false, tags = {"@smoke_test"})
 @CucumberOptions(
-		
 		features = "classpath:transactionservicetest/TransactionType.feature", strict = false)
 public class TransactionTypeTest {
 	

@@ -18,6 +18,10 @@ import org.json.JSONObject;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+/*
+ * Step definition of feature files.
+ * Assertions are hardcoded for now.
+ */
 
 public class TransactionTypeSteps {
 	  
